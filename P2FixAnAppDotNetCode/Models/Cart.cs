@@ -63,7 +63,7 @@ namespace P2FixAnAppDotNetCode.Models
         {
             // TODO implement the method
             // DONE OD
-            return GetCartLineList().Sum(x => x.Product.Price);
+            return GetCartLineList().Sum(x => x.Product.Price * x.Quantity);
         }
 
         /// <summary>
@@ -73,10 +73,8 @@ namespace P2FixAnAppDotNetCode.Models
         {
             // TODO implement the method
             // DONE OD
-            if (GetCartLineList().Count > 0)
-                return GetCartLineList().Average(x => x.Product.Price);
-            else
-                return 0.0;
+            int nb = GetCartLineList().Sum(l => l.Quantity);
+            return nb > 0 ? GetTotalValue() / nb : 0.0;
         }
 
         /// <summary>
